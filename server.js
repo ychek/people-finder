@@ -1,20 +1,28 @@
+'use strict';
+
 const express = require('express');
+const fs = require('fs');
+const { Node, Trie } = require('./bll/trie');
+const dataManager = require('./bll/dataStructuresManager');
 
 const app = express();
 const port = process.env.PORT || 5555;
 
+const db = JSON.parse(fs.readFileSync('./data/people.json', 'utf8'));
 
-//TODO:
-//    1. Create an index of the data.json file
-//    2. Load indexed field in a trie (prefix-tree)
-//    3. Use the prefix tree for the auto-complete on the client
+// 1. Transform db to a key value store
+const keyValueStore = dataManager.createKeyValueStore(db);
 
+// 2. Create an index of the people
+const peopleIndex = dataManager.createIndex(db);
 
+const trie = new Trie();
+// 3. Load names to the trie
+dataManager.loadIndexToTrie(peopleIndex, trie);
 
-app.get('/api/users', (req, res) => {
+app.get('/api/search', (req, res) => {
 
     const text = req.query.q;
-    const requestNumber = req.query.n;
 
     // Simulate delay for the requests
 
@@ -25,8 +33,15 @@ app.get('/api/users', (req, res) => {
     // },randomTime );
     //
 
-    res.send({ text : text , data : [], num : requestNumber});
+    const dataSet = dataManager.searchForData(text, trie, keyValueStore, peopleIndex);
+    if (dataSet) {
 
+        const {suggestions, promo, users } = dataSet;
+        res.send({ searchedText: text , suggestions, promo, users });
+    }
+    else{
+        res.send({ searchedText: text , suggestions : [], promo: {}, users: [] });
+    }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

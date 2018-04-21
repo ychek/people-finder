@@ -5,7 +5,7 @@ import './App.css';
 class App extends Component {
     constructor() {
         super();
-        this._lastRequestNumber = 0;
+        this._lastRequestSearch = 0;
         this.state = {
             people : [],
             searchedText: ''
@@ -13,13 +13,13 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.callApi("all", this._lastRequestNumber)
+        this.callApi("")
             .then(res => this.setState({people: res.data, searchedText: res.text}))
             .catch(err => console.log(err));
     }
 
-    callApi = async (query, num) => {
-        const response = await fetch(`/api/users?q=${query}&n=${num.toString()}`);
+    callApi = async (query) => {
+        const response = await fetch(`/api/search?q=${query}`);
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);
@@ -31,18 +31,18 @@ class App extends Component {
     _autosearch(event) {
         console.log("Changes occurs in the text input");
         const inputElement = this._input;
-        const textToSearch = inputElement.value.trim();
+        const textToSearch = inputElement.value.toLowerCase();
         if (textToSearch) {
-            const lastRequestNum = ++this._lastRequestNumber;
-            this.callApi(textToSearch, lastRequestNum)
+            const lastRequestText = textToSearch;
+            this.callApi(textToSearch)
 
 
 
 
                 .then(res => {
-                    // update the state with the 'response' to most recent request sent
-                    if (parseInt(res.num, 10) === lastRequestNum) {
-                        this.setState({people: res.data, searchedText: res.text})
+                    // because request are async we don't know which of the responses will come last, so we check that the response match the input
+                    if (res.searchedText === lastRequestText) {
+                        this.setState({people: res.data, searchedText: res.searchedText})
                     }
                 })
                 .catch(err => console.log(err));

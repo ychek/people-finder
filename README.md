@@ -11,3 +11,9 @@ To start the server and client at the same time (from the root of the project)
 ```
 yarn dev
 ```
+
+To run the unit test
+
+```
+yarn test
+```

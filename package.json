@@ -1,15 +1,19 @@
 {
   "name": "people-finder",
   "version": "1.0.0",
+  "author": "Yaniv Chekroun",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "node server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "test": "mocha"
   },
   "dependencies": {
     "express": "^4.16.2"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0"
+    "chai": "^4.1.2",
+    "concurrently": "^3.5.0",
+    "mocha": "^5.1.1"
   }
 }
