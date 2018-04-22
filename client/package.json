@@ -5,13 +5,32 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-toolbox": "^2.0.0-beta.12",
+    "react-toolbox-themr": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "toolbox": "react-toolbox-themr"
   },
-  "proxy": "http://localhost:5555/"
+  "proxy": "http://localhost:5555/",
+  "reactToolbox": {
+    "include": [
+      "BUTTON",
+      "AUTOCOMPLETE",
+      "LIST",
+      "CARD"
+    ],
+    "customProperties": {
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
+    },
+    "output": "src/assets/react-toolbox"
+  }
 }

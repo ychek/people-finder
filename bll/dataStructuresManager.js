@@ -27,14 +27,10 @@ const createIndex = (db) => {
     for (let i = 0; i < db.length; i++) {
         const person = db[i];
 
-        const firstname = person.firstName;
-        const lastname = person.lastName;
         const firstlastname = person.firstName + ' ' + person.lastName;
         const lastfirstname = person.lastName + ' ' + person.firstName;
         const id = person.id;
 
-        bigIndex[firstname.toLowerCase()] = id;
-        bigIndex[lastname.toLowerCase()] = id;
         bigIndex[firstlastname.toLowerCase()] = id;
         bigIndex[lastfirstname.toLowerCase()] = id;
     }
@@ -60,11 +56,18 @@ const searchForData = (query, trie, keyValueStore, peopleIndex) => {
 
     const peopleIds = [];
 
+    const seenPeopleIds = new Set();
+
     for (let i = 0; i < matches.length; i++) {
         const name = matches[i];
         const personId = peopleIndex[name];
-        if (peopleIds.indexOf(personId) === -1)
+
+        // search if in the set is O(1) so better for performance
+        if (!seenPeopleIds.has(personId)) {
+            seenPeopleIds.add(personId);
             peopleIds.push(personId)
+        }
+
     }
 
     const users = [];

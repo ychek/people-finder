@@ -24,23 +24,22 @@ app.get('/api/search', (req, res) => {
 
     const text = req.query.q;
 
-    // Simulate delay for the requests
-
-    // const randomTime = Math.floor(Math.random() * 6000) + 1000;
-    // console.log(randomTime);
-    // setTimeout(function () {
-    //     res.send({ text : text , data : [], num : requestNumber });
-    // },randomTime );
-    //
-
     const dataSet = dataManager.searchForData(text, trie, keyValueStore, peopleIndex);
     if (dataSet) {
 
         const {suggestions, promo, users } = dataSet;
         res.send({ searchedText: text , suggestions, promo, users });
+
+        // FOR DEBUG
+        // Simulate a delay (1-6sec) for the requests
+
+        // const randomTime = Math.floor(Math.random() * 6000) + 1000;
+        // setTimeout(function () {
+        //     res.send({ searchedText: text , suggestions, promo, users });
+        // },randomTime );
     }
     else{
-        res.send({ searchedText: text , suggestions : [], promo: {}, users: [] });
+        res.send({ searchedText: text , suggestions : [], promo: {}, users: []});
     }
 });
 

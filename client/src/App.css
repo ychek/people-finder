@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -8,10 +9,12 @@
 }
 
 .App-header {
-  /*background-color: #222;*/
-  /*height: 150px;*/
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
   padding: 20px;
-  color: cornflowerblue;
+  color: #3f51b5;
+  font-size: 1.2em;
+
 }
 
 .App-title {
@@ -20,4 +23,55 @@
 
 .App-intro {
   font-size: large;
+}
+
+
+.Search-box {
+  z-index: 9999999;
+  width: 550px;
+  margin: 0 auto;
+  position: relative;
+
+}
+
+.Search-input {
+  position: absolute;
+  left: 0;
+  width: 400px;
+}
+
+.Search-button {
+  position: absolute;
+  right: 45px;
+  top: 29px;
+}
+
+.Result-box {
+
+  padding-top: 121px;
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+
+
+}
+
+.People-box {
+
+  width: 64%;
+  position: absolute;
+  left: 0;
+
+}
+
+.Promo-box {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+
+}
+
+.Person-card {
+  margin-bottom: 12px;
+
 }
