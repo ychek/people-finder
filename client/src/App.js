@@ -142,8 +142,8 @@ class Peoplebox extends React.Component {
 
     _getPeople() {
 
-        return this.props.people.map((person, idx) =>
-            <Card key={idx} className="Person-card">
+        return this.props.people.map((person) =>
+            <Card key={person.id} className="Person-card">
                 <ListItem
                     avatar={person.avatar}
                     caption={`${person.firstName} ${person.lastName}`}
