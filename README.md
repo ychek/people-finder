@@ -32,5 +32,9 @@ To run the unit test
 yarn test
 ```
 
+Sources:
+
+- [Make a *create-react-app* working with node backend](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
+- [Using *react-toolbox* with *create-react-app*](https://medium.com/@liangchun/using-react-toolbox-with-create-react-app-f4c2a529949)
 
 #### Enjoy!
